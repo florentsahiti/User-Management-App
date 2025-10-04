@@ -192,11 +192,7 @@ const UserList = () => {
             key={user.id}
             className={`bg-white rounded-xl p-5 cursor-pointer hover:shadow-md transition-all border-l-4 ${user.isNew
               ? 'bg-green-50/40 border-green-500'
-              : index % 3 === 0
-                ? 'border-primary-600'
-                : index % 3 === 1
-                  ? 'border-blue-500'
-                  : 'border-purple-500'
+              : 'border-red-500'
               } shadow-sm border-r border-t border-b border-gray-200`}
             onClick={() => handleRowClick(user.id)}
           >
