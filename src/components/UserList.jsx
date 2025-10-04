@@ -32,7 +32,11 @@ const UserList = () => {
   };
 
   const handleDelete = (userId) => {
-    if (window.confirm('Do you want to delete this user?')) {
+    // More mobile-friendly confirmation
+    const user = users.find(u => u.id === userId);
+    const userName = user ? user.name : 'this user';
+    
+    if (window.confirm(`Are you sure you want to delete ${userName}? This action cannot be undone.`)) {
       dispatch(deleteUser(userId));
     }
   };
@@ -145,22 +149,32 @@ const UserList = () => {
                     </span>
                   </td>
                   <td className="px-5 py-4">
-                    <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center justify-end gap-3">
                       <button
                         onClick={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           navigate(`/edit-user/${user.id}`);
                         }}
-                        className="text-sm font-semibold text-black hover:text-gray-700 px-3 py-2 rounded-md hover:bg-gray-100 transition-all border border-gray-300 hover:border-gray-400"
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        className="text-sm font-semibold text-black hover:text-gray-700 px-4 py-3 rounded-md hover:bg-gray-100 transition-all border border-gray-300 hover:border-gray-400 min-h-[44px] min-w-[60px] touch-manipulation"
                       >
                         Edit
                       </button>
                       <button
                         onClick={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           handleDelete(user.id);
                         }}
-                        className="text-sm font-semibold text-red-600 hover:text-red-700 px-3 py-2 rounded-md hover:bg-red-50 transition-all border border-red-300 hover:border-red-400"
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        className="text-sm font-semibold text-red-600 hover:text-red-700 px-4 py-3 rounded-md hover:bg-red-50 transition-all border border-red-300 hover:border-red-400 min-h-[44px] min-w-[70px] touch-manipulation"
                       >
                         Delete
                       </button>
@@ -202,22 +216,32 @@ const UserList = () => {
                 <span className="font-medium">Company:</span> {user.company?.name || 'N/A'}
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   navigate(`/edit-user/${user.id}`);
                 }}
-                className="flex-1 text-black hover:text-gray-700 font-semibold py-2.5 px-3 rounded-lg hover:bg-gray-100 transition-all text-base border border-gray-300 hover:border-gray-400"
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+                className="flex-1 text-black hover:text-gray-700 font-semibold py-3 px-4 rounded-lg hover:bg-gray-100 transition-all text-base border border-gray-300 hover:border-gray-400 min-h-[48px] touch-manipulation"
               >
                 Edit
               </button>
               <button
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   handleDelete(user.id);
                 }}
-                className="flex-1 text-red-600 hover:text-red-700 font-semibold py-2.5 px-3 rounded-lg hover:bg-red-50 transition-all text-base border border-red-300 hover:border-red-400"
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+                className="flex-1 text-red-600 hover:text-red-700 font-semibold py-3 px-4 rounded-lg hover:bg-red-50 transition-all text-base border border-red-300 hover:border-red-400 min-h-[48px] touch-manipulation"
               >
                 Delete
               </button>
